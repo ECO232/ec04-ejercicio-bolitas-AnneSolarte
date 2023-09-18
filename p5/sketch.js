@@ -1,6 +1,5 @@
 // Item creation
-const canvas = document.getElementById('myCanvas');
-const context = canvas.getContext('2d');
+
 
 class Item{
     constructor(x, y, r, g, b){
@@ -41,7 +40,8 @@ async function fetchItems() {
   let items = []
 
 function setup() {
-    createCanvas(400, 400);
+  const canvas = createCanvas(400, 400); // Crea el canvas con las dimensiones deseadas
+  canvas.id('myCanvas')
 
     fetchItems().then(onServerItems => {
       console.log('Fetched items:', onServerItems.items);
@@ -53,7 +53,7 @@ function setup() {
       console.error('Error:', error);
     });
   }
-  
+
 
 function draw() {
   background(220);
@@ -103,6 +103,9 @@ async function postNewItem(data) {
 
 async function clearCanvas() {
   try {
+    const canvas = document.getElementById('myCanvas'); // Obtén el canvas
+    const context = canvas.getContext('2d'); // Obtén el contexto
+
     const response = await fetch(apiUrlForClear, {
       method: 'POST',
       headers: {
@@ -121,5 +124,10 @@ async function clearCanvas() {
     console.error('Error clearing items:', error);
   }
 }
+
+
+
+
+
 
 
